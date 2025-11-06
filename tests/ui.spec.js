@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import {MainPage} from '../page/main_page.js';
+import { exp } from 'prelude-ls';
 
 test ('Title on avia', async ({ page }) => {
   const mainPage = new MainPage(page);
@@ -9,7 +10,7 @@ test ('Title on avia', async ({ page }) => {
   await expect(mainPage._title).toContainText('Спецпредложения авиакомпаний')
 });
 
-test ('Autorization on avia', async ({ page }) => {
+test.only ('Autorization on avia', async ({ page }) => {
   const mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
   const mainPageAutorization = await mainPage.clickLk();
@@ -83,7 +84,7 @@ test ('Autorization in the basket', async ({page}) => {
   await expect(basketPageStep2._formTourist).toBeVisible;
 })
 
-test.only ('Failed booking - non checkbox', async ({page}) => {
+test ('Failed booking - non checkbox', async ({page}) => {
   const mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
@@ -104,7 +105,7 @@ test.only ('Failed booking - non checkbox', async ({page}) => {
   await expect(basketPageStep2.__messageErrorAgreement).toBeVisible;
 })
 
-/*test.only ('Failed booking - non checkbox', async ({page}) => {
+/*test.only ('Booking and pay', async ({page}) => {
   const mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
@@ -121,8 +122,17 @@ test.only ('Failed booking - non checkbox', async ({page}) => {
   await basketPageStep2.middleNameFill();
   await basketPageStep2.chooseGender();
   await basketPageStep2.birthdayFill();
-  await basketPageStep2.clickButtonBook();
-  await expect(basketPageStep2.__messageErrorAgreement).toBeVisible;
+  await basketPageStep2.clickAgreement();
+  const orderPage = await basketPageStep2.clickGoToOrderPage();
+  await expect(orderPage._title).toBeVisible;
+  await expect(orderPage._from_to_order).toContainText('Позиция: Москва — Сочи');
+  const payPage = await orderPage.clickPayButton();
+  await expect(payPage._title).toBeVisible;
+  await payPage.clickSbp();
+  await expect(payPage._sbpQr).toBeVisible;
+  await payPage.clickRussianCard();
+  const tbankPage = await payPage.clickGoToPay();
+  await expect(tbankPage._logo).toBeVisible;
 })*/
 
 
