@@ -30,7 +30,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test ui.spec.js
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v3
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
@@ -38,7 +38,7 @@ jobs:
         retention-days: 30
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v3
+      uses: actions/deploy-pages@v4
   notification:
     if: always()
     needs: [test]
