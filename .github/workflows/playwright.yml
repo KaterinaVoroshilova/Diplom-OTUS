@@ -18,6 +18,7 @@ jobs:
       
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -37,7 +38,7 @@ jobs:
         retention-days: 30
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v3
   notification:
     if: always()
     needs: [test]
