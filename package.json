@@ -139,10 +139,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KaterinaVoroshilova/OTUS-HW-GIT-VOROSHILOVA.git"
+    "url": "git+https://github.com/KaterinaVoroshilova/Diplom-OTUS.git"
   },
   "bugs": {
-    "url": "https://github.com/KaterinaVoroshilova/OTUS-HW-GIT-VOROSHILOVA/issues"
+    "url": "https://github.com/KaterinaVoroshilova/Diplom-OTUS/issues"
   },
-  "homepage": "https://github.com/KaterinaVoroshilova/OTUS-HW-GIT-VOROSHILOVA#readme"
+  "homepage": "https://github.com/KaterinaVoroshilova/Diplom-OTUS#readme"
 }
