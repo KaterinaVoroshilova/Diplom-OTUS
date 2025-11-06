@@ -30,7 +30,11 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test ui.spec.js
-    - uses: actions/upload-artifact@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
