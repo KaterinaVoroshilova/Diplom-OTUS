@@ -33,7 +33,7 @@ jobs:
       
     - name: Run Playwright tests
       run: npx playwright test ui.spec.js
-       env:
+      env:
         TELEGRAM_ENABLE: 'true'
         TELEGRAM_TOKEN: "${{secrets.TELEGRAM_TOKEN}}"
         TELEGRAM_CHAT_ID: "${{secrets.TELEGRAM_CHAT_ID}}"
