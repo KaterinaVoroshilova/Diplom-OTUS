@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import {MainPage} from '../page/main_page.js';
-import { exp } from 'prelude-ls';
 
 test ('Title on avia', async ({ page }) => {
   const mainPage = new MainPage(page);
