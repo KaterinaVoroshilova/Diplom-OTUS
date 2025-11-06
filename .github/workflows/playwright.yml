@@ -4,12 +4,18 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
 permissions:
       id-token: write
       contents: write
-      pages: write    
+      pages: write  
+      
 jobs:
   test:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
