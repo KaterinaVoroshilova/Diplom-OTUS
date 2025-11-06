@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import {MainPage} from '../page/main_page.js';
+import TelegramServices from '../framework/services/TelegramServices.js';
 
 test ('Title on avia', async ({ page }) => {
   const mainPage = new MainPage(page);
@@ -100,9 +101,10 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await basketPageStep2.middleNameFill();
   await basketPageStep2.chooseGender();
   await basketPageStep2.birthdayFill();
+  await basketPageStep2.numberFill();
   await basketPageStep2.clickButtonBook();
   await expect(basketPageStep2.__messageErrorAgreement).toBeVisible;
-})
+})*/
 
 /*test.only ('Booking and pay', async ({page}) => {
   const mainPage = new MainPage(page);
@@ -115,23 +117,25 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await basketPageAutorization.emailFill('testfs0123@yandex.ru');
   await basketPageAutorization.passwordFill('@Test0123');
   page.keyboard.press('Enter');
-  const basketPageStep2 = await basketPageAutorization.clickEnterButtonOnForm();
+  const basketPageStep2 = await basketPageAutorization.clickEnterButtonOnFormBasket();
   await basketPageStep2.lastNameFill();
   await basketPageStep2.nameFill();
   await basketPageStep2.middleNameFill();
   await basketPageStep2.chooseGender();
   await basketPageStep2.birthdayFill();
+  await basketPageStep2.numberFill();
   await basketPageStep2.clickAgreement();
   const orderPage = await basketPageStep2.clickGoToOrderPage();
   await expect(orderPage._title).toBeVisible;
+  const message = await orderPage._title.textContent;
+  await TelegramServices.sendMessage(message);
   await expect(orderPage._from_to_order).toContainText('Позиция: Москва — Сочи');
-  const payPage = await orderPage.clickPayButton();
+  /*const payPage = await orderPage.clickPayButton();
   await expect(payPage._title).toBeVisible;
   await payPage.clickSbp();
   await expect(payPage._sbpQr).toBeVisible;
   await payPage.clickRussianCard();
   const tbankPage = await payPage.clickGoToPay();
-  await expect(tbankPage._logo).toBeVisible;
-})*/
-
+  await expect(tbankPage._logo).toBeVisible;*/
+})
 

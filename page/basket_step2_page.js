@@ -1,5 +1,6 @@
 import { OrderPage } from "./order_page";
 import { fakerRU } from "@faker-js/faker";
+import { randomInt } from "crypto";
 import dayjs from 'dayjs';
 
 export class BasketPageStep2
@@ -17,7 +18,7 @@ export class BasketPageStep2
         this._inputContactLastName = page.locator('[id="lastName"]');
         this._inputContactFirstName = page.locator('[id="firstName"]');
         this._inputContactMiddleName = page.locator('[id="middleName"]');
-        this._checkBoxAgreement = page.locator('[for="agreement"]');
+        this._checkBoxAgreement = page.locator('span[data-v-bf00de62 = ""]').filter({hasText: ' и '});
         this._genderWomen = page.locator('.dropdown-select__element').filter({hasText: 'Жен'});
         this._messageErrorAgreement = page.locator('.agreement-warning').filter({hasText: 'Нужно согласие с условиями договора'});
         this._buttonBook = page.locator('.pay-btn').first();
@@ -50,6 +51,11 @@ export class BasketPageStep2
     async birthdayFill() {
         const birthday = fakerRU.date.birthdate({mode: 'age', min: 18, max: 50});
         await this._inputBirthday.fill(dayjs(birthday).format('DDMMYYYY'));
+    }
+
+    async numberFill() {
+        const number = randomInt(1111111111, 9999999999);
+        await this._inputNumberOfDocument.fill(`${number}`);
     }
 
     

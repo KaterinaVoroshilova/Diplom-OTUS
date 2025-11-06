@@ -10,7 +10,7 @@ export class PaymentPage
         this._cardRus = page.locator('.v-payment-provider_description').filter({hasText: 'Российская карта'});
         this._cardNoRus = page.locator('.v-payment-provider_description').filter({hasText: 'Зарубежная карта'});
         this._sbpQr = page.locator('.v-payment-sbp_wrapper_qr');
-        this._payButton = page.locator('.v-button');
+        this._payButton = page.locator('.v-button').filter({hasText:'Оплатить'});
     }
 
     
