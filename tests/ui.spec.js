@@ -9,7 +9,7 @@ test ('Title on avia', async ({ page }) => {
   await expect(mainPage._title).toContainText('Спецпредложения авиакомпаний')
 });
 
-test.only ('Autorization on avia', async ({ page }) => {
+test ('Autorization on avia', async ({ page }) => {
   const mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
   const mainPageAutorization = await mainPage.clickLk();
@@ -20,7 +20,7 @@ test.only ('Autorization on avia', async ({ page }) => {
   await expect(mainPage._userMenu).toBeVisible;
 });
 
-test ('Message nothing', async ({ page }) => {
+/*test ('Message nothing', async ({ page }) => {
   const mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
   await mainPage.fillFrom('123'); 
