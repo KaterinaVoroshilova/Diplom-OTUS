@@ -39,14 +39,15 @@ jobs:
       
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
-        
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      
   notification:
     if: always()
     needs: [test]
