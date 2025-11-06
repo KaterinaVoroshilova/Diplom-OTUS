@@ -136,6 +136,6 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await expect(payPage._sbpQr).toBeVisible;
   await payPage.clickRussianCard();
   const tbankPage = await payPage.clickGoToPay();
-  await expect(tbankPage._logo).toBeVisible;*/
-})
+  await expect(tbankPage._logo).toBeVisible;
+})*/
 
