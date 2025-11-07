@@ -10,7 +10,7 @@ const sendMessage = async (message) => {
     return
   }
 
-  return await fetch(`https://api.telegram.org/bot${config.token}/sendMessage`, {
+  const response = await fetch(`https://api.telegram.org/bot${config.token}/sendMessage`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -20,6 +20,9 @@ const sendMessage = async (message) => {
       text: message
     })
   })
+  console.log('response.status', response.status)
+  console.log('data', await response.json())
+  return response
 }
 
 export default {

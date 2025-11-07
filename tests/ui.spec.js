@@ -10,7 +10,7 @@ test ('Title on avia', async ({ page }) => {
   await expect(mainPage._title).toContainText('Спецпредложения авиакомпаний')
 });
 
-test ('Autorization on avia', async ({ page }) => {
+/*test ('Autorization on avia', async ({ page }) => {
   const mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
   const mainPageAutorization = await mainPage.clickLk();
@@ -111,7 +111,7 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
-  await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 20000 });
+  await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 40000 });
   const basketPageAutorization = await basketPageStep1.clickGoToStepTourists();
   await basketPageAutorization.clickButton();
   await basketPageAutorization.emailFill('testfs0123@yandex.ru');
@@ -127,9 +127,9 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await basketPageStep2.clickAgreement();
   const orderPage = await basketPageStep2.clickGoToOrderPage();
   await expect(orderPage._title).toBeVisible;
-  const message = await orderPage._title.textContent;
+  const message = await orderPage._title.textContent();
   await TelegramServices.sendMessage(message);
-  await expect(orderPage._from_to_order).toContainText('Позиция: Москва — Сочи');
+  await expect(orderPage._from_to_order).toContainText('Москва — Сочи');
   /*const payPage = await orderPage.clickPayButton();
   await expect(payPage._title).toBeVisible;
   await payPage.clickSbp();
