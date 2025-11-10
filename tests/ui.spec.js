@@ -31,7 +31,7 @@ test ('Message nothing', async ({ page }) => {
   await expect(mainPage._cityList).toHaveText('Ничего не найдено')
 });
 
-/*test ('Enter departure city', async ({ page }) => {
+test ('Enter departure city', async ({ page }) => {
   await mainPage.fillFrom('');
   await mainPage.fillFrom('Санкт')
   await expect(mainPage._cityList).toBeVisible();
@@ -96,7 +96,7 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await expect(basketPageStep2.__messageErrorAgreement).toBeVisible;
 })
 
-/*test.only ('Booking and pay', async ({page}) => {
+test.only ('Booking and pay', async ({page}) => {
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 40000 });
@@ -124,6 +124,6 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await expect(payPage._sbpQr).toBeVisible;
   await payPage.clickRussianCard();
   const tbankPage = await payPage.clickGoToPay();
-  await expect(tbankPage._logo).toBeVisible;
-})*/
+  await expect(tbankPage._logo).toBeVisible;*/
+})
 
