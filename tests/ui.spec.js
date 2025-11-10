@@ -116,7 +116,7 @@ test.only ('Booking and pay', async ({page}) => {
   const orderPage = await basketPageStep2.clickGoToOrderPage();
   await expect(orderPage._title).toBeVisible;
   const message = await orderPage._title.textContent();
-  await TelegramServices.sendMessage(message);
+  await TelegramServices.sendMessage("Бронирование успешно\n" + message + "\n Москва — Сочи");
   await expect(orderPage._from_to_order).toContainText('Москва — Сочи');
   /*const payPage = await orderPage.clickPayButton();
   await expect(payPage._title).toBeVisible;
