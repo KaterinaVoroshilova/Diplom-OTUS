@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export default Object.freeze({
   enable: process.env.TELEGRAM_ENABLE === 'true',
   token: process.env.TELEGRAM_TOKEN,

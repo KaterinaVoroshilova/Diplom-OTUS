@@ -2,17 +2,21 @@ import { test, expect } from '@playwright/test';
 import {MainPage} from '../page/main_page.js';
 import TelegramServices from '../framework/services/TelegramServices.js';
 
-test ('Title on avia', async ({ page }) => {
-  const mainPage = new MainPage(page);
+let mainPage;
+
+test.beforeEach(async ({ page }) => {
+  mainPage = new MainPage(page);
   await mainPage.goto('https://fstravel.com/avia');
-  await expect(mainPage._searchForm).toBeVisible;
-  await expect(mainPage._banner).toBeVisible;
-  await expect(mainPage._title).toContainText('Спецпредложения авиакомпаний')
+  console.log('Начало нового теста');
 });
 
-/*test ('Autorization on avia', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
+test ('Title on avia', async ({ page }) => {
+  await expect(mainPage._searchForm).toBeVisible;
+  await expect(mainPage._banner).toBeVisible;
+  await expect(mainPage._title).toContainText('Спецпредложения авиакомпаний');
+});
+
+test ('Autorization on avia', async ({ page }) => {
   const mainPageAutorization = await mainPage.clickLk();
   await mainPageAutorization.emailFill('testfs0123@yandex.ru');
   await mainPageAutorization.passwordFill('@Test0123');
@@ -21,17 +25,13 @@ test ('Title on avia', async ({ page }) => {
   await expect(mainPage._userMenu).toBeVisible;
 });
 
-/*test ('Message nothing', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
+test ('Message nothing', async ({ page }) => {
   await mainPage.fillFrom('123'); 
   await expect(mainPage._cityList).toBeVisible();
   await expect(mainPage._cityList).toHaveText('Ничего не найдено')
 });
 
-test ('Enter departure city', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
+/*test ('Enter departure city', async ({ page }) => {
   await mainPage.fillFrom('');
   await mainPage.fillFrom('Санкт')
   await expect(mainPage._cityList).toBeVisible();
@@ -42,8 +42,6 @@ test ('Enter departure city', async ({ page }) => {
 });
 
 test ('Search', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Санкт-П', 'Москв');
   await expect(searchResultPage._title.first()).toContainText('Авиабилеты Санкт-Петербург - Москва');
   await expect(searchResultPage._leftCity).toContainText('Санкт-Петербург');
@@ -51,8 +49,6 @@ test ('Search', async ({ page }) => {
 });
 
 test ('Go to basket', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Мос', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 20000 });
@@ -61,8 +57,6 @@ test ('Go to basket', async ({ page }) => {
 
 
 test ('Go to basket step 2', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Мос', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 20000 });
@@ -71,8 +65,6 @@ test ('Go to basket step 2', async ({ page }) => {
 });
 
 test ('Autorization in the basket', async ({page}) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Мос', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 20000 });
@@ -85,8 +77,6 @@ test ('Autorization in the basket', async ({page}) => {
 })
 
 test ('Failed booking - non checkbox', async ({page}) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 20000 });
@@ -104,11 +94,9 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await basketPageStep2.numberFill();
   await basketPageStep2.clickButtonBook();
   await expect(basketPageStep2.__messageErrorAgreement).toBeVisible;
-})*/
+})
 
 /*test.only ('Booking and pay', async ({page}) => {
-  const mainPage = new MainPage(page);
-  await mainPage.goto('https://fstravel.com/avia');
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 40000 });
