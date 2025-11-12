@@ -11,7 +11,7 @@ export class MainPage {
         this._iconUser = page.locator('.dropdown');
         this._userMenu = page.locator('.user-menu');
         this._banner = page.locator('.container-slider-main-banner');
-        this._searchForm = page.locator('.v-search-filter v-pt-4 v-pb-1')
+        this._searchForm = page.locator('.v-search-filter')
         this._inputFrom = page.locator('[data-cy="whereFromSearchField"]');
         this._inputTo = page.locator('[data-cy="whereToSearchField"]');
         this._inputThere = page.locator('[data-cy="dateForward"]');

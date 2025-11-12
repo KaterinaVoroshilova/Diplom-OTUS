@@ -11,8 +11,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 test ('Title on avia', async ({ page }) => {
-  await expect(mainPage._searchForm).toBeVisible;
-  await expect(mainPage._banner).toBeVisible;
+  await expect(mainPage._searchForm).toBeVisible();
+  await expect(mainPage._banner).toBeVisible();
   await expect(mainPage._title).toContainText('Спецпредложения авиакомпаний');
 });
 
@@ -22,7 +22,7 @@ test ('Autorization on avia', async ({ page }) => {
   await mainPageAutorization.passwordFill('@Test0123');
   page.keyboard.press('Enter');
   await mainPage.clickLkUser();
-  await expect(mainPage._userMenu).toBeVisible;
+  await expect(mainPage._userMenu).toBeVisible();
 });
 
 test ('Message nothing', async ({ page }) => {
@@ -36,8 +36,8 @@ test ('Enter departure city', async ({ page }) => {
   await mainPage.fillFrom('Санкт')
   await expect(mainPage._cityList).toBeVisible();
   await expect(mainPage._cityList).first().toContainText('Санкт-Петербург');
-  await mainPage.clickFirstCityOfList;
-  await mainPage.clickFrom;
+  await mainPage.clickFirstCityOfList();
+  await mainPage.clickFrom();
   await expect(mainPage._cityList).toContainText('Санкт-Петербург')
 });
 
@@ -61,7 +61,7 @@ test ('Go to basket step 2', async ({ page }) => {
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 20000 });
   const basketPageAutorization = await basketPageStep1.clickGoTostepTiurists();
-  await expect(basketPageAutorization._enterButton).toBeVisible;
+  await expect(basketPageAutorization._enterButton).toBeVisible();
 });
 
 test ('Autorization in the basket', async ({page}) => {
@@ -73,7 +73,7 @@ test ('Autorization in the basket', async ({page}) => {
   await basketPageAutorization.emailFill('testfs0123@yandex.ru');
   await basketPageAutorization.passwordFill('@Test0123');
   const basketPageStep2 = await basketPageAutorization.clickEnterButtonOnForm();
-  await expect(basketPageStep2._formTourist).toBeVisible;
+  await expect(basketPageStep2._formTourist).toBeVisible();
 })
 
 test ('Failed booking - non checkbox', async ({page}) => {
@@ -93,10 +93,10 @@ test ('Failed booking - non checkbox', async ({page}) => {
   await basketPageStep2.birthdayFill();
   await basketPageStep2.numberFill();
   await basketPageStep2.clickButtonBook();
-  await expect(basketPageStep2.__messageErrorAgreement).toBeVisible;
+  await expect(basketPageStep2.__messageErrorAgreement).toBeVisible();
 })
 
-test.only ('Booking and pay', async ({page}) => {
+test ('Booking and pay', async ({page}) => {
   const searchResultPage = await mainPage.searchFor3Month('Моск', 'Соч');
   const basketPageStep1 = await searchResultPage.addToBasket();
   await basketPageStep1._title.filter({ hasText: 'Бронирование' }).waitFor({ state: 'visible', timeout: 40000 });
@@ -114,7 +114,7 @@ test.only ('Booking and pay', async ({page}) => {
   await basketPageStep2.numberFill();
   await basketPageStep2.clickAgreement();
   const orderPage = await basketPageStep2.clickGoToOrderPage();
-  await expect(orderPage._title).toBeVisible;
+  await expect(orderPage._title).toBeVisible();
   const message = await orderPage._title.textContent();
   await TelegramServices.sendMessage("Бронирование успешно\n" + message + "\n Москва — Сочи");
   await expect(orderPage._from_to_order).toContainText('Москва — Сочи');

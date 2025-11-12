@@ -20,9 +20,7 @@ const sendMessage = async (message) => {
       text: message
     })
   })
-  console.log('response.status', response.status)
-  console.log('data', await response.json())
-  return response
+  return response;
 }
 
 export default {
